@@ -25,13 +25,15 @@ public class SensorInfo {
                 showDialog = true;
                 index = (int)(Math.random() * (stick.sticks.length - 1));
                 int checkSentiment = index + 1;
+                String sentiment = (checkSentiment == 1 || checkSentiment == 3 || checkSentiment == 5) ? "GOOD" :
+                        (checkSentiment == 2 || checkSentiment == 6 || checkSentiment == 9) ? "BAD" : "NORMAL";
 
                 final AlertDialog.Builder viewDialog = new AlertDialog.Builder(context);
-                if (checkSentiment == 1 || checkSentiment == 3 || checkSentiment == 5) { // Good
+                if (sentiment.equalsIgnoreCase("GOOD")) {
                     viewDialog.setIcon(R.drawable.stat_happy);
-                } else if (checkSentiment == 2 || checkSentiment == 6 || checkSentiment == 9) { // Bad
+                } else if (sentiment.equalsIgnoreCase("BAD")) {
                     viewDialog.setIcon(R.drawable.stat_sad);
-                } else { // Normal (4,7,8)
+                } else {
                     viewDialog.setIcon(R.drawable.stat_neutral);
                 }
                 viewDialog.setTitle("ใบที่ " + String.valueOf(index + 1));
@@ -41,7 +43,6 @@ public class SensorInfo {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         showDialog = false;
-
                     }
                 });
                 viewDialog.show();
